@@ -1,0 +1,17 @@
+# Environnements virtuels / caches Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# Bases locales
+feedback.db
+
+# Fichiers de test / sensibles (ne pas publier)
+test_secrets.py
+
+# Streamlit (contient secrets.toml)
+.streamlit/
