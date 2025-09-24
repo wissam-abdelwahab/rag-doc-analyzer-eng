@@ -1,27 +1,20 @@
-# RAG PDF Analyzer
-
-A Streamlit application to analyze PDF documents using Retrieval-Augmented Generation (RAG).  
-Upload PDFs, build a vector index, retrieve top-k chunks, and generate grounded answers.
-
-## Features
-- Multi-PDF upload and on-the-fly chunking
-- Backend switch: LangChain or LlamaIndex
-- Answer language selector (EN/FR/ES/DE)
-- Configurable top-k retrieval
-- User feedback stored in SQLite
-- One-click deploy on Streamlit Community Cloud
-
 ## Quickstart
 ```bash
+# create virtual env
 python3 -m venv .venv
 source .venv/bin/activate
+
+# install dependencies
 pip install -r requirements.txt
+
+# run app
 streamlit run app.py
-```
+````
 
 ## Configuration
 
-Define secrets (e.g. API keys) in `.streamlit/secrets.toml`. Never hardcode credentials.
+Define secrets (e.g. API keys) in `.streamlit/secrets.toml`.  
+Never hardcode credentials.
 
 Example:
 
@@ -39,29 +32,39 @@ api_version      = "2024-02-01"
 azure_api_key    = "YOUR-EMBEDDING-KEY"
 ```
 
+---
+
 ## Project structure
 
 ```
 .
 ├── app.py
-├── rag/                # backends (langchain.py, llamaindex.py, etc.)
+├── rag/                # backend (langchain.py)
 ├── pages/              # extra Streamlit pages (optional)
-├── notebooks/          # demos/experiments (outputs cleared)
-├── samples/            # small example PDFs only
+├── samples/            # small example PDFs
 ├── requirements.txt
 └── .gitignore
 ```
 
+---
+
 ## Deploy
 
-Connect this repository to Streamlit Community Cloud, set Python version and secrets, and deploy `app.py`.
+1. Push repo to GitHub
+2. Connect it to [Streamlit Community Cloud](https://streamlit.io/cloud)
+3. Set Python version + install from `requirements.txt`
+4. Add your secrets in the Streamlit UI
+5. Deploy `app.py` 
+
+---
 
 ## Notes
 
-* `rag/` must contain `__init__.py`, `langchain.py`, and `llamaindex.py`.
-* Do **not** commit API keys → keep them in `.streamlit/secrets.toml`.
-* Keep `samples/` PDFs small (a few MB).
-* Always “Clear all outputs” in notebooks before pushing.
+* Do **not** commit API keys, keep them in `.streamlit/secrets.toml`
+* Keep `samples/` PDFs small (few MB max)
+* Always *Clear all outputs* before pushing notebooks (if you add any later)
+
+---
 
 ## Local test
 
@@ -72,6 +75,3 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-* Upload 1–2 PDFs from `samples/`
-* Ask a question → check that a model answer is returned
-* Verify that `feedback.db` is created and feedback is stored
